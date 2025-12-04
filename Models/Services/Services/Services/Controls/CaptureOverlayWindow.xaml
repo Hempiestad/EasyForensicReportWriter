@@ -1,0 +1,10 @@
+<Window x:Class="EasyForensicReportWriter.Controls.CaptureOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select Region to Capture" WindowStyle="None" WindowState="Maximized"
+        AllowsTransparency="True" Background="Black" Topmost="True" ShowInTaskbar="False">
+    <Grid>
+        <Canvas x:Name="CaptureCanvas" Background="Transparent" MouseLeftButtonDown="StartCapture" 
+                MouseMove="DuringCapture" MouseLeftButtonUp="EndCapture"/>
+    </Grid>
+</Window>

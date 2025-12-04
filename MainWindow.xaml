@@ -1,0 +1,58 @@
+<Window x:Class="EasyForensicReportWriter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Easy Forensic Report Writer" Height="900" Width="1400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left: Evidence Tree -->
+        <DockPanel Grid.Column="0">
+            <ToolBar DockPanel.Dock="Top">
+                <Button Content="Capture Screenshot" Click="Capture_Click" FontWeight="Bold"/>
+            </ToolBar>
+            <TreeView x:Name="EvidenceTree" SelectedItemChanged="EvidenceTree_SelectedItemChanged"/>
+        </DockPanel>
+
+        <!-- Center: Rich Text Editor -->
+        <DockPanel Grid.Column="1">
+            <ToolBar DockPanel.Dock="Top">
+                <Button Content="Insert Selected Image" Click="InsertImage_Click"/>
+                <Button Content="Run OCR → Narrative" Click="OcrToNarrative_Click"/>
+                <Separator/>
+                <ComboBox x:Name="FontSizeCombo" Width="50" SelectionChanged="FontSizeChanged">
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem>12</ComboBoxItem>
+                    <ComboBoxItem Selected="True">14</ComboBoxItem>
+                    <ComboBoxItem>16</ComboBoxItem>
+                    <ComboBoxItem>18</ComboBoxItem>
+                </ComboBox>
+            </ToolBar>
+            <RichTextBox x:Name="ReportEditor" AcceptsTab="True" VerticalScrollBarVisibility="Auto">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="Start writing your forensic report here..."/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </DockPanel>
+
+        <!-- Right: Properties -->
+        <DockPanel Grid.Column="2">
+            <GroupBox Header="Selected Evidence" DockPanel.Dock="Top">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Hash Info:" FontWeight="Bold"/>
+                    <TextBox x:Name="HashBox" IsReadOnly="True" TextWrapping="Wrap" Height="80" VerticalScrollBarVisibility="Auto"/>
+                    <TextBlock Text="OCR Result:" FontWeight="Bold" Margin="0,10,0,0"/>
+                    <TextBox x:Name="OcrBox" IsReadOnly="True" TextWrapping="Wrap" Height="150" VerticalScrollBarVisibility="Auto"/>
+                    <Button Content="Generate Narrative" Click="GenerateNarrative_Click" Margin="0,10,0,0"/>
+                    <Separator Margin="0,10,0,0"/>
+                    <Button Content="Export Report (DOCX + PDF)" Click="ExportReport_Click" FontWeight="Bold"/>
+                </StackPanel>
+            </GroupBox>
+        </DockPanel>
+    </Grid>
+</Window>
